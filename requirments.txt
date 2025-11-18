@@ -1,0 +1,64 @@
+#langchain core
+langchain
+langchain-core
+langchain-community
+langchain-chroma
+pydantic
+pydantic[email]
+pypdf
+
+
+#retrievers
+wikipedia
+selenium
+beautifulsoup4
+unstructured
+
+
+#openai-integration
+langchain-openai
+openai
+
+
+#anthropic integration
+langchain-anthropic
+
+
+#google gemini (PaLM) integration
+langchain-google-genai
+google-generativeai
+youtube-transcript-api
+
+
+#hugging face integration
+langchain-huggingface
+transformers
+huggingface-hub
+sentence-transformers
+
+
+#Download purpose
+hf_xet
+accelerate
+bitsandbytes
+
+
+#Web interface
+streamlit
+grandalf
+
+
+#environment variable management
+python-dotenv
+
+
+#Vector database
+chromadb
+tiktoken
+
+
+#machine learning utilities
+numpy
+pandas
+scikit-learn
+scipy
