@@ -4,6 +4,7 @@ from langchain_chroma import Chroma
 from langchain_google_genai import GoogleGenerativeAIEmbeddings
 from dotenv import load_dotenv
 import uuid
+import streamlit as st
 
 # query = "what is Domicile certificate here?"
 # text = """
@@ -11,9 +12,10 @@ import uuid
 #         Residence Certificate: This term can sometimes be used more broadly or informally to mean any proof of current residence, which might be temporary in nature (e.g., utility bill or rent agreement).
 #         """
 def store_to_vector_db(text):
-    load_dotenv()
+    api_key = st.secrets["GOOGLE_API_KEY"]
     embedding_model = GoogleGenerativeAIEmbeddings(
-        model="models/gemini-embedding-001"
+        model="models/gemini-embedding-001",
+        google_api_key = api_key
     )
     paragraph_store = dict()
 
