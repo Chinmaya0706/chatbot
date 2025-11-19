@@ -8,13 +8,12 @@ from langchain_huggingface import ChatHuggingFace, HuggingFacePipeline
 from vector_db_store import store_to_vector_db
 from retrieving_relevant_lines import get_relavant_lines 
 from system_prompt_for_personality import personality
+from api_key_extract import get_api_key
 import streamlit as st
 import time
-import os
 
 @st.cache_resource
 def get_model(_api_key:str):
-    api_key = st.secrets["GOOGLE_API_KEY"]
     model = ChatGoogleGenerativeAI(
         # model="gemini-2.5-flash",
         model = "gemini-2.5-flash",
@@ -157,16 +156,7 @@ if prompt := st.chat_input("Ask something!"):
     message_for_llm.append(HumanMessage(content=prompt))
 
     # Get AI response and display with streaming
-    if "GOOGLE_API_KEY" in st.secrets:
-        api_key = st.secrets["GOOGLE_API_KEY"]
-    # 2. If not found, fall back to environment variables (for local development with .env)
-    else:
-        load_dotenv() # Load the .env file contents
-        api_key = os.getenv("GOOGLE_API_KEY")
-
-    if not api_key:
-        st.error("🔑 API Key Missing! Please set GOOGLE_API_KEY in .env or Streamlit Secrets.")
-        st.stop()
+    api_key = get_api_key()
     model, parser = get_model(api_key)
     chain = model | parser
 

@@ -1,22 +1,12 @@
 from langchain_chroma import Chroma
 from langchain_google_genai import GoogleGenerativeAIEmbeddings
 from dotenv import load_dotenv
+from api_key_extract import get_api_key
 import streamlit as st
-import os
 
 @st.cache_resource
 def get_embedding_model():
-    # Handle Keys safely
-    if "GOOGLE_API_KEY" in st.secrets:
-        api_key = st.secrets["GOOGLE_API_KEY"]
-    else:
-        load_dotenv()
-        api_key = os.getenv("GOOGLE_API_KEY")
-
-    if not api_key:
-        st.error("API Key missing")
-        st.stop()
-        
+    api_key = get_api_key()    
     return GoogleGenerativeAIEmbeddings(
         model="models/gemini-embedding-001",
         google_api_key=api_key

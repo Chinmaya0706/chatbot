@@ -3,10 +3,9 @@ from langchain_core.documents import Document
 from langchain_chroma import Chroma
 from langchain_google_genai import GoogleGenerativeAIEmbeddings
 from dotenv import load_dotenv
+from api_key_extract import get_api_key
 import streamlit as st
 import uuid
-import os
-
 # query = "what is Domicile certificate here?"
 # text = """
 #         Domicile Certificate: This specifically certifies you as a permanent resident of a state, implying a long-term intention to reside there and usually involves meeting a minimum residency duration criterion (e.g., 3 to 15 years, depending on the state). It grants access to permanent resident benefits like education and job quotas.
@@ -14,16 +13,7 @@ import os
 #         """
 @st.cache_resource
 def get_embedding_model():
-    # Handle Keys safely
-    if "GOOGLE_API_KEY" in st.secrets:
-        api_key = st.secrets["GOOGLE_API_KEY"]
-    else:
-        load_dotenv()
-        api_key = os.getenv("GOOGLE_API_KEY")
-
-    if not api_key:
-        st.error("API Key missing")
-        st.stop()
+    api_key = get_api_key 
         
     return GoogleGenerativeAIEmbeddings(
         model="models/gemini-embedding-001",
