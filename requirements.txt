@@ -1,7 +1,7 @@
 #langchain core
-langchain
-langchain-core
-langchain-community
+langchain>=0.3.0
+langchain-core>=0.3.0
+langchain-community>=0.3.0
 langchain-chroma
 pydantic
 pydantic[email]
@@ -25,7 +25,7 @@ langchain-anthropic
 
 
 #google gemini (PaLM) integration
-langchain-google-genai>=3.1.0
+langchain-google-genai>=2.0.0
 google-generativeai
 youtube-transcript-api
 
