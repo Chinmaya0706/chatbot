@@ -2,14 +2,29 @@ from langchain_chroma import Chroma
 from langchain_google_genai import GoogleGenerativeAIEmbeddings
 from dotenv import load_dotenv
 import streamlit as st
+import os
+
+@st.cache_resource
+def get_embedding_model():
+    # Handle Keys safely
+    if "GOOGLE_API_KEY" in st.secrets:
+        api_key = st.secrets["GOOGLE_API_KEY"]
+    else:
+        load_dotenv()
+        api_key = os.getenv("GOOGLE_API_KEY")
+
+    if not api_key:
+        st.error("API Key missing")
+        st.stop()
+        
+    return GoogleGenerativeAIEmbeddings(
+        model="models/gemini-embedding-001",
+        google_api_key=api_key
+    )
 
 def get_relavant_lines(prompt:str, paragraph_store:dict):
     
-    api_key = st.secrets["GOOGLE_API_KEY"]
-    embedding_function = GoogleGenerativeAIEmbeddings(
-        model = "models/gemini-embedding-001",
-        google_api_key = api_key
-    )
+    embedding_function = get_embedding_model()
     vector_store = Chroma(
         embedding_function=embedding_function,
         persist_directory="chroma_db",
