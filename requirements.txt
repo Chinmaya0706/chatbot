@@ -25,7 +25,7 @@ langchain-anthropic
 
 
 #google gemini (PaLM) integration
-langchain-google-genai
+langchain-google-genai>=3.1.0
 google-generativeai
 youtube-transcript-api
 
