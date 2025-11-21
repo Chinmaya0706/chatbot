@@ -13,7 +13,7 @@ import uuid
 #         """
 @st.cache_resource
 def get_embedding_model():
-    api_key = get_api_key 
+    api_key = get_api_key()
         
     return GoogleGenerativeAIEmbeddings(
         model="models/gemini-embedding-001",
