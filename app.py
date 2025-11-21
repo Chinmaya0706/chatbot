@@ -7,7 +7,7 @@ from link_extractor import links_extractor, text_extraction_from_link
 from langchain_huggingface import ChatHuggingFace, HuggingFacePipeline
 from vector_db_store import store_to_vector_db
 from retrieving_relevant_lines import get_relavant_lines 
-from chatBot.personality_prompt import personality
+from personality_prompt import personality
 from api_key_extract import get_api_key
 import streamlit as st
 import time
