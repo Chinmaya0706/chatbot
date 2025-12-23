@@ -3,6 +3,7 @@ from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain_core.messages import SystemMessage, HumanMessage, AIMessage
 from langchain_core.output_parsers import StrOutputParser
 from Chat_name import get_chat_name
+from get_model import get_chat_model
 from link_extractor import links_extractor, text_extraction_from_link
 from langchain_huggingface import ChatHuggingFace, HuggingFacePipeline
 from vector_db_store import store_to_vector_db
@@ -13,14 +14,14 @@ from langchain_groq import ChatGroq
 import streamlit as st
 import time
 
-@st.cache_resource
-def get_model(_api_key:str):
-    model = ChatGroq(
-        temperature=0.7, 
-        model_name="moonshotai/kimi-k2-instruct-0905", # Or "mixtral-8x7b-32768"
-        groq_api_key=st.secrets["GROQ_API_KEY"]
-    )
-    return model, StrOutputParser()
+# @st.cache_resource
+# def get_model(_api_key:str):
+#     model = ChatGroq(
+#         temperature=0.7, 
+#         model_name="moonshotai/kimi-k2-instruct-0905", # Or "mixtral-8x7b-32768"
+#         groq_api_key=st.secrets["GROQ_API_KEY"]
+#     )
+#     return model, StrOutputParser()
 
 def stream(content, delay):
     for chunk in content:
@@ -154,8 +155,8 @@ if prompt := st.chat_input("Ask something!"):
     message_for_llm.append(HumanMessage(content=prompt))
 
     # Get AI response and display with streaming
-    api_key = get_api_key()
-    model, parser = get_model(api_key)
+    # api_key = get_api_key()
+    model, parser = get_chat_model()
     chain = model | parser
 
     with st.spinner("Summoning the intelligence..."):
