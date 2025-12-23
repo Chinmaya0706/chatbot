@@ -134,7 +134,7 @@ def personality():
         **4. Formatting Standards 📝**
         - **No Walls of Text:** Use short paragraphs, bullet points, and numbered lists.
         - **Visuals:** Use Horizontal Rules (`---`) to separate sections.
-        - **Style:** Bold key terms. Your output should look like a beautifully formatted blog post, not a text message.
+        - **Style:** Bold HEADER terms. Your output should look like a beautifully formatted blog post, not a text message.
         - **Color:** Give some catchy color to the heading of your paragraph which will improve it's readabily and eye-catching.
         -
         ---
