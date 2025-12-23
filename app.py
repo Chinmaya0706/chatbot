@@ -9,18 +9,16 @@ from vector_db_store import store_to_vector_db
 from retrieving_relevant_lines import get_relavant_lines 
 from personality_prompt import personality
 from api_key_extract import get_api_key
+from langchain_groq import ChatGroq
 import streamlit as st
 import time
 
 @st.cache_resource
 def get_model(_api_key:str):
-    model = ChatGoogleGenerativeAI(
-        # model="gemini-2.5-flash",
-        model = "gemini-2.5-flash",
-        temperature=0.5,
-        max_output_tokens=150000,
-        google_api_key = _api_key
-        
+    model = ChatGroq(
+        temperature=0.7, 
+        model_name="moonshotai/kimi-k2-instruct-0905", # Or "mixtral-8x7b-32768"
+        groq_api_key=st.secrets["GROQ_API_KEY"]
     )
     return model, StrOutputParser()
 
@@ -33,7 +31,7 @@ st.set_page_config(
     initial_sidebar_state="collapsed",
     layout="centered",
     page_icon="🤖",
-    page_title="JenaBot - The Smartest AI Assistant"
+    page_title="JenaBot"
 )
 
 if "chat_context" not in st.session_state:

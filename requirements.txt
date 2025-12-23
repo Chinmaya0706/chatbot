@@ -29,6 +29,7 @@ langchain-anthropic
 langchain-google-genai
 # google-generativeai
 youtube-transcript-api
+langchain-groq
 
 
 #hugging face integration
@@ -60,7 +61,7 @@ langchain-chroma
 
 
 #machine learning utilities
-numpy
-pandas
-scikit-learn
-scipy
+# numpy
+# pandas
+# scikit-learn
+# scipy
